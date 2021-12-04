@@ -4,7 +4,7 @@
       <input type="text" class="searchbar" placeholder="Ort eingeben" v-model="query" @keypress="getData">
     </div>
 
-    <div id="wrapper" class="weather-wrapper" v-if="typeof weather.main != 'undefined'">
+    <div id="wrapper1" class="weather-wrapper" v-if="typeof weather.main != 'undefined'">
       <div class="location-box">
         <div class="location">{{ weather.name }}, {{ weather.sys.country }} </div>
         <div class="date"> {{ handleDate() }} </div>
@@ -16,11 +16,13 @@
       </div>
     </div>
 
-    <div id="warpper" class="wiki-wrapper">
+    <div id="wrapper2" class="wiki-wrapper">
       <t1>{{ weather.name }}</t1>
-      <div class="article"></div>
-      <a v-on="click">
-          <img src="./assets/play.png" />
+      <div class="article">
+        {{ this.article }}
+      </div>
+      <a>
+          <img src="./assets/play.png" style="width:30px; height: auto;"/>
       </a>
     </div>
   </main>
@@ -30,11 +32,11 @@
 
 export default {
   name: "App",
-  isCold: true,
   data () {
     return{
       api_key: '1f3e379d7b4cbb2bbb0527cb6b3a654b',
       url_base: 'https://api.openweathermap.org/data/2.5/',
+      url_base_wiki: 'https://de.wikipedia.org/w/api.php?action=query&titles=',  //&prop=extracts&format=json&exintro=1
       query:'',
       weather: {}
     }
@@ -46,12 +48,29 @@ export default {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
         .then(res => {
           return res.json();
-        }).then(this.setWeather);
+        }).then(this.setWeather).then(this.getArticle);
+
+        //this.getArticle();
       }
+    },
+
+    getArticle () {
+      fetch(`${this.url_base_wiki}${this.query}&prop=extracts&format=json&exintro=1&origin=*`)
+      .then(art => {
+        return art.json();
+      }).then(this.setArticle);
+      },
+
+    sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
     },
 
     setWeather (results) {
       this.weather = results;
+    },
+
+    setArticle (result) {
+      this.article = result;
     },
 
     handleDate () {
@@ -188,7 +207,17 @@ main{
   text-align: center;
 }
 
-#wrapper {
+#wrapper1 {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: rgba(0 , 0, 0, 0.7);
+  border-radius: 20px;
+  margin: 30px 0px;
+
+  box-shadow: 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+#wrapper2 {
   display: inline-block;
   padding: 10px 25px;
   background-color: rgba(0 , 0, 0, 0.7);
