@@ -1,19 +1,27 @@
 <template>
-  <main>
+  <main id="app" v-bind:class="computeClass(computedClass)">
     <div class="search">
       <input type="text" class="searchbar" placeholder="Ort eingeben" v-model="query" @keypress="getData">
     </div>
 
-    <div class="weather-wrapper" v-if="typeof weather.main != 'undefied'">
+    <div id="wrapper" class="weather-wrapper" v-if="typeof weather.main != 'undefined'">
       <div class="location-box">
-        <div class="location">{{ weather.name }}, {{weather.sys.country}}</div>
-        <div class="date">Donnerstag 02.12.2021</div>
+        <div class="location">{{ weather.name }}, {{ weather.sys.country }} </div>
+        <div class="date"> {{ handleDate() }} </div>
       </div>
 
       <div class="weatherbox">
-        <div class="temperature">1°C</div>
-        <div class="weather">Snow</div>
+        <div class="temperature">{{ Math.round(weather.main.temp) }}°C</div>
+        <div class="weather">{{ weather.weather[0].main }}</div>
       </div>
+    </div>
+
+    <div id="warpper" class="wiki-wrapper">
+      <t1>{{ weather.name }}</t1>
+      <div class="article"></div>
+      <a v-on="click">
+          <img src="./assets/play.png" />
+      </a>
     </div>
   </main>
 </template>
@@ -22,6 +30,7 @@
 
 export default {
   name: "App",
+  isCold: true,
   data () {
     return{
       api_key: '1f3e379d7b4cbb2bbb0527cb6b3a654b',
@@ -30,6 +39,7 @@ export default {
       weather: {}
     }
   },
+
   methods: {
     getData (e) {
       if (e.key == "Enter") {
@@ -42,9 +52,45 @@ export default {
 
     setWeather (results) {
       this.weather = results;
+    },
+
+    handleDate () {
+      let date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+
+      if(day<10){
+        day = '0' + day;
+      }
+
+      return `${day}.${month}.${year}`;
+    },
+
+    computeClass: function (classname){
+      classname = 'default';
+      let date = new Date();
+      let hour = date.getHours();
+
+      if(this.weather.main !== undefined){
+        if (this.weather.main.temp > 14 && hour > 7 && hour < 18){
+          classname = 'warm';
+        }
+        else if(this.weather.main.temp > 14){
+          classname = 'warmnight'
+        }
+        else if(this.weather.main.temp < 15 && hour > 7 && hour < 18){
+          classname = 'cold';
+        }
+        else if(this.weather.main.temp < 15){
+          classname = 'coldnight';
+        }
+      }
+      return classname;
     }
   }
-};
+}
+
 </script>
 
 <style>
@@ -59,13 +105,34 @@ body{
 }
 
 #app{
-  background-image: url('./assets/cold.jpg');
   background-size: cover;
   background-position: bottom;
   transition: 0.6s;
 }
 
+#app.default {
+  background-color: black;
+}
+
+#app.warm {
+  background-image: url('./assets/warm.jpg');
+}
+
+#app.warmnight {
+  background-image: url('./assets/warmnight.jpg');
+}
+
+#app.cold {
+  background-image: url('./assets/cold.jpg');
+}
+
+#app.coldnight {
+  background-image: url('./assets/coldnight.jpg');
+}
+
+
 main{
+  text-align: center;
   min-height: 100vh;
   padding: 25px;
 
@@ -94,11 +161,15 @@ main{
   background-color: rgba(255, 255, 255, 0,5);
   border-radius: 15px;
   transition: 0.6s;
+
+  color: whitesmoke;
 }
 
 .search .searchbar:focus {
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.2);
   background-color: rgba(255 , 255, 255, 0.6);
+
+  color: black;
 }
 
 .location-box .location {
@@ -117,6 +188,16 @@ main{
   text-align: center;
 }
 
+#wrapper {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: rgba(0 , 0, 0, 0.7);
+  border-radius: 20px;
+  margin: 30px 0px;
+
+  box-shadow: 3px 4px rgba(0, 0, 0, 0.3);
+}
+
 .weatherbox {
   text-align: center;
 }
@@ -132,8 +213,6 @@ main{
   background-color: rgba(255 , 255, 255, 0.25);
   border-radius: 20px;
   margin: 30px 0px;
-
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .weatherbox .weather {
