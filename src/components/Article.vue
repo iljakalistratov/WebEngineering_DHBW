@@ -1,8 +1,8 @@
 <template>
-    <div id="wrapper2" class="wiki-wrapper">
-      <t1></t1>
+    <div id="wrapper2" class="wiki-wrapper" v-if="typeof this.article != 'undefined'"> 
+      <t1>{{ this.city }}</t1>
       <div class="articleW"> {{ this.article }} </div>
-      <a>
+      <a @click="readArticle()">
           <img src="../assets/play.png" style="width:30px; height: auto;"/>
       </a>
     </div>
@@ -22,6 +22,7 @@ export default {
 
             })
 
+        this.city = ort;
         this.$forceUpdate();
         },
 
@@ -29,6 +30,10 @@ export default {
             this.article = result;
             console.log(this.article);
         },
+
+        readArticle(){
+
+        }
     }
 }
 </script>
@@ -43,6 +48,15 @@ export default {
     margin: 30px 0px;
 
     box-shadow: 3px 4px rgba(0, 0, 0, 0.3);
+
+    color: whitesmoke;
     }
+
+    t1 {
+        font-size: 25px;
+        text-decoration: underline whitesmoke;
+        padding-bottom: 100px;
+    }
+
 
 </style>

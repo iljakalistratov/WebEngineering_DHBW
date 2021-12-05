@@ -4,6 +4,7 @@
       <input type="text" class="searchbar" placeholder="Ort eingeben" v-model="query" @keypress="getData">
     </div>
 
+
     <div id="wrapper1" class="weather-wrapper" v-if="typeof weather.main != 'undefined'">
       <div class="location-box">
         <div class="location">{{ weather.name }}, {{ weather.sys.country }} </div>
@@ -17,7 +18,6 @@
     </div>
 
     <Article ref="articleComponent"></Article>
-
     
   </main>
 </template>
