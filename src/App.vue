@@ -17,8 +17,11 @@
       </div>
     </div>
 
-    <Article ref="articleComponent"></Article>
+    <div class="wikipediaWrapper" v-if="typeof(weather.main) != 'undefined'">
+      <Article ref="articleComponent"></Article>
+    </div>
     
+
   </main>
 </template>
 

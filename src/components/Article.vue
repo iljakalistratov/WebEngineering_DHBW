@@ -1,7 +1,7 @@
 <template>
-    <div id="wrapper2" class="wiki-wrapper" v-if="typeof(this.city) != 'undefined'"> 
+    <div id="wrapper2" class="wiki-wrapper" > 
       <t1>{{ this.city }}</t1>
-      <div class="articleW"> {{ this.article }} </div>
+      <p class="articleW"> {{ this.article }} </p>
       <a class="clicker" @click="readArticle()">
           <img class="clicker" src="../assets/play.png" style="width:30px; height: auto;"/>
       </a>
