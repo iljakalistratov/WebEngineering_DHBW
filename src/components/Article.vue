@@ -1,9 +1,9 @@
 <template>
-    <div id="wrapper2" class="wiki-wrapper" v-if="typeof this.article != 'undefined'"> 
+    <div id="wrapper2" class="wiki-wrapper" v-if="typeof(this.city) != 'undefined'"> 
       <t1>{{ this.city }}</t1>
       <div class="articleW"> {{ this.article }} </div>
-      <a @click="readArticle()">
-          <img src="../assets/play.png" style="width:30px; height: auto;"/>
+      <a class="clicker" @click="readArticle()">
+          <img class="clicker" src="../assets/play.png" style="width:30px; height: auto;"/>
       </a>
     </div>
 </template>
@@ -32,7 +32,19 @@ export default {
         },
 
         readArticle(){
+            let synth = window.speechSynthesis;
+            let textToRead = this.article;
 
+            let utterThis = new SpeechSynthesisUtterance(textToRead);
+
+            utterThis.lang = 'de-DE';
+
+            if(synth.speaking){
+                synth.cancel();
+            }
+            else{
+                synth.speak(utterThis);
+            }
         }
     }
 }
@@ -56,6 +68,12 @@ export default {
         font-size: 25px;
         text-decoration: underline whitesmoke;
         padding-bottom: 100px;
+    }
+
+    .clicker {
+
+        margin-bottom: 7px;
+        cursor: pointer;
     }
 
 
