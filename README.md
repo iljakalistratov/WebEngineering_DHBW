@@ -37,9 +37,9 @@ Note: This starts/serves the application in dev-mode. That means that warnings i
 This project requires an API-Key for the OpenWeatherMap-API.
 It is essential to type or copy it to the .env file. Without it this application will not work properly.
 
-## Known Isssues (Already working on fixes)
+## Known Isssues (working on fixes)
 - You may need to press Enter multiple times (2 - 4), to load the article properly
-- Hard Coded API-Key, beacuase of Problems of dotenv with Vue
+- Hard Coded API-Key, because of Problems of dotenv with Vue
 
 
 ## Used Libraries & Technologies
