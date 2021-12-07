@@ -46,6 +46,9 @@ export default {
   },
 
   methods: {
+
+    //Fetch Weather & Wikipedia Data
+
     getData (e) {
       if (e.key == "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
@@ -59,10 +62,14 @@ export default {
     },
 
 
+    //set fetched weather as variable
+
     setWeather (results) {
       this.weather = results;
       this.weatherStatus = this.weather.weather[0].main;
     },
+
+    //Date Handler -> Load and proccess date
 
     handleDate () {
       let date = new Date();
@@ -77,6 +84,7 @@ export default {
       return `${day}.${month}.${year}`;
     },
 
+
     handleIcon() {
       let iconCode = this.weather[0].icon;
 
@@ -84,6 +92,7 @@ export default {
       console.log(iconUrl);
     },
 
+    // coumpute main class, depending on temperature, to set background conditionally
     computeClass: function (classname){
       classname = 'default';
       let date = new Date();

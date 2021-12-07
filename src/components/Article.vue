@@ -13,6 +13,8 @@ export default {
     name: 'Article',
 
     methods: {
+
+        // Fetch function for wikipedia article
         getArticle (ort) {
       
             const wtf = require('wtf_wikipedia')
@@ -26,11 +28,13 @@ export default {
             this.$forceUpdate();
         },
 
+        // set fetched article as variable
         setArticle (result) {
             this.article = result;
             console.log(this.article);
         },
 
+        //Text to speech synthesis of article
         readArticle(){
             let synth = window.speechSynthesis;
             let textToRead = this.article;
