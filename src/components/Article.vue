@@ -22,8 +22,8 @@ export default {
 
             })
 
-        this.city = ort;
-        this.$forceUpdate();
+            this.city = ort;
+            this.$forceUpdate();
         },
 
         setArticle (result) {

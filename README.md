@@ -37,7 +37,7 @@ This project requires an API-Key for the OpenWeatherMap-API.
 It is essential to type or copy it to the .env file. Without it this application will not work properly.
 
 ## Known Isssues (Already working on fixes)
-- You need to press enter 2 or 3 times, to load the article 
+- You may need to press Enter multiple times (2 - 4), to load the article properly
 - CSS Bug if screensize is 1080p in combination with an small article
 
 

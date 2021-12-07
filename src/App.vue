@@ -13,7 +13,8 @@
 
       <div class="weatherbox">
         <div class="temperature">{{ Math.round(weather.main.temp) }}°C</div>
-        <div class="weather"></div>
+        <div class="weather">{{ weather.weather[0].main }}</div>
+        <img src="" />
       </div>
     </div>
 
@@ -37,7 +38,8 @@ export default {
   data () {
     return{
       api_key: '1f3e379d7b4cbb2bbb0527cb6b3a654b',
-      url_base: 'https://api.openweathermap.org/data/2.5/',  //&prop=extracts&format=json&exintro=1
+      url_base: 'https://api.openweathermap.org/data/2.5/',
+      url_base_icon: 'http://openweathermap.org/img/w/',  //&prop=extracts&format=json&exintro=1
       query:'',
       weather: {}
     }
@@ -73,6 +75,13 @@ export default {
       }
 
       return `${day}.${month}.${year}`;
+    },
+
+    handleIcon() {
+      let iconCode = this.weather[0].icon;
+
+      let iconUrl = this.url_base_icon + iconCode + ".png"
+      console.log(iconUrl);
     },
 
     computeClass: function (classname){
@@ -214,7 +223,7 @@ main{
   display: inline-block;
   padding: 10px 25px;
   color: whitesmoke;
-  font-size: 100px;
+  font-size: 80px;
   font-weight: 900;
 
   text-shadow: 3px 6px rgba(0, 0, 0, 0.2);
