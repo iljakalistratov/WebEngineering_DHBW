@@ -54,7 +54,7 @@ export default {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
         .then(res => {
           return res.json();
-        }).then(this.setWeather).then(this.$refs.articleComponent.getArticle(this.query));
+        }).then(this.setWeather).then(() => {this.$refs.articleComponent.getArticle(this.query)});
         
         //this.getArticle();
         //this.$refs.articleComponent.reload();
@@ -82,14 +82,6 @@ export default {
       }
 
       return `${day}.${month}.${year}`;
-    },
-
-
-    handleIcon() {
-      let iconCode = this.weather[0].icon;
-
-      let iconUrl = this.url_base_icon + iconCode + ".png"
-      console.log(iconUrl);
     },
 
     // coumpute main class, depending on temperature, to set background conditionally
@@ -137,7 +129,8 @@ body{
 }
 
 #app.default {
-  background-color: black;
+  background: rgb(181,102,102);
+  background: radial-gradient(circle, rgba(181,102,102,1) 0%, rgba(9,121,88,1) 35%, rgba(0,212,255,1) 100%);
 }
 
 #app.warm {

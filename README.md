@@ -22,7 +22,8 @@ Now the application should be installed properly
 ### Compiles and hot-reloads for development
 To start the application please run the command `npm run serve`.
 
-Note: This starts/serves the application in dev-mode.
+Note: This starts/serves the application in dev-mode. That means that warnings in the browser console may occure.
+
 
 ## Features
 - Search for City or Country
@@ -38,7 +39,7 @@ It is essential to type or copy it to the .env file. Without it this application
 
 ## Known Isssues (Already working on fixes)
 - You may need to press Enter multiple times (2 - 4), to load the article properly
-- CSS Bug if screensize is 1080p in combination with an small article
+- Hard Coded API-Key, beacuase of Problems of dotenv with Vue
 
 
 ## Used Libraries & Technologies

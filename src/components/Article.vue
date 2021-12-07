@@ -31,7 +31,7 @@ export default {
         // set fetched article as variable
         setArticle (result) {
             this.article = result;
-            console.log(this.article);
+            //console.log(this.article);
         },
 
         //Text to speech synthesis of article
