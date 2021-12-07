@@ -52,7 +52,7 @@ export default {
         }).then(this.setWeather).then(this.$refs.articleComponent.getArticle(this.query));
         
         //this.getArticle();
-        this.$refs.articleComponent.reload();
+        //this.$refs.articleComponent.reload();
       }
     },
 
