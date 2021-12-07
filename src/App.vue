@@ -129,8 +129,8 @@ body{
 }
 
 #app.default {
-  background: rgb(181,102,102);
-  background: radial-gradient(circle, rgba(181,102,102,1) 0%, rgba(9,121,88,1) 35%, rgba(0,212,255,1) 100%);
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
 
 #app.warm {
