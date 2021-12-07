@@ -8,6 +8,8 @@ The information consists of:
 - current weather data
 - summed up information/article about your search query (wikipedia)
 
+This application does not have a backend. That means that, everything is computed in the frontend.
+
 ## Project setup
 1. get your api key on https://openweathermap.org/api
 2. clone this repo
@@ -25,6 +27,8 @@ Note: This starts/serves the application in dev-mode.
 ## Features
 - Search for City or Country
 - Shows current relevant weather data
+- conditional background:
+(warm weather -> summer background, cold weather -> winter background, day & night background)
 - Shows the first paragraph (summary) of the matching wikipedia article
 - Option to let your browser read the summary (Speech Synthesis)
 
@@ -38,7 +42,7 @@ It is essential to type or copy it to the .env file. Without it this application
 
 
 ## Used Libraries & Technologies
-https://vuejs.org/
+VUE 3 - https://vuejs.org/
 
 https://openweathermap.org/api
 
